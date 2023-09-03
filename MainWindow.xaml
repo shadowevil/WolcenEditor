@@ -7,8 +7,62 @@
         ui:WindowHelper.UseModernWindowStyle="True"
         xmlns:local="clr-namespace:WolcenEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="Window_Loaded">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Height="30">
+            <MenuItem Header="File" MaxHeight="30" FontSize="14">
+                <MenuItem Header="Open" Click="MenuItem_Open_Click"/>
+                <MenuItem Header="Save"/>
+                <Separator/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="Help" MaxHeight="30" FontSize="14"/>
+        </Menu>
+        <TextBox x:Name="OpenCharacterTxt" Grid.Row="1" IsEnabled="False" IsReadOnly="True" Margin="5,5,5,0" MaxHeight="15" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" Padding="0,0,0,0" />
+        <Grid x:Name="DataGrid" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
+            <TextBlock HorizontalAlignment="Right" Margin="0, 0, 5, 0" Grid.Row="0" Grid.Column="0" Text="Name:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" Margin="10,3,10,3" HorizontalContentAlignment="Center" FontSize="12" VerticalContentAlignment="Stretch" />
+
+            <TextBlock HorizontalAlignment="Right" Margin="0, 0, 5, 0" Grid.Row="1" Grid.Column="0"  Text="PlayerId:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PlayerId}" Margin="10,3,10,3" HorizontalContentAlignment="Center" FontSize="12" VerticalContentAlignment="Stretch" />
+
+            <TextBlock HorizontalAlignment="Right" Margin="0, 0, 5, 0" Grid.Row="2" Grid.Column="0"  Text="CharacterId:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CharacterId}" Margin="10,3,10,3" HorizontalContentAlignment="Center"  FontSize="12" VerticalContentAlignment="Stretch" />
+
+            <TextBlock HorizontalAlignment="Right" Margin="0, 0, 5, 0" Grid.Row="3" Grid.Column="0"  Text="DifficultyMode:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding DifficultyMode}" Margin="10,3,10,3" HorizontalContentAlignment="Center" FontSize="12" VerticalContentAlignment="Stretch" />
+
+            <TextBlock HorizontalAlignment="Right" Margin="0, 0, 5, 0" Grid.Row="4" Grid.Column="0" Text="League:" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding League}" Margin="10,3,10,3" HorizontalContentAlignment="Center" FontSize="12" VerticalContentAlignment="Stretch" />
+        </Grid>
     </Grid>
 </Window>

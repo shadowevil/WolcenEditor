@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Win32;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.IO;
 using WolcenData;
+using ModernWpf;
 
 namespace WolcenEditor
 {
@@ -21,23 +12,40 @@ namespace WolcenEditor
     /// </summary>
     public partial class MainWindow : Window
     {
+        public CharacterData? cd;
+
         public MainWindow()
         {
             InitializeComponent();
+            ThemeManager.SetRequestedTheme(this, ElementTheme.Light);
+        }
 
-            CharacterData cd = new CharacterData(@"C:\Users\ShadowEvil\Saved Games\wolcen\savegames\characters\shadowevil.json");
-            cd.Stats.Gold = "99999";
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
 
-            cd.Telemetry.GoldDropped.Total = cd.Stats.Gold;
-            cd.Telemetry.GoldPicked.Total = cd.Stats.Gold;
-            cd.Telemetry.GoldGainedQuests.Total = cd.Stats.Gold;
-            cd.Telemetry.GoldGainedMerchant.Total = cd.Stats.Gold;
+        private void MenuItem_Open_Click(object sender, RoutedEventArgs e)
+        {
+            string savedGamesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Saved Games");
 
-            cd.Telemetry.GoldDropped.PerLevel = cd.Stats.Gold;
-            cd.Telemetry.GoldPicked.PerLevel = cd.Stats.Gold;
-            cd.Telemetry.GoldGainedQuests.PerLevel = cd.Stats.Gold;
-            cd.Telemetry.GoldGainedMerchant.PerLevel = cd.Stats.Gold;
-            cd.Save();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Open a Wolcen Save File";
+            openFileDialog.DefaultExt = ".json";
+            openFileDialog.Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*";
+            openFileDialog.InitialDirectory = savedGamesPath;
+
+            openFileDialog.Multiselect = false;
+
+            bool? result = openFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string selectedFilePath = openFileDialog.FileName;
+                cd = new CharacterData(selectedFilePath);
+                OpenCharacterTxt.Text = cd.FilePath;
+                DataContext = cd;
+            }
         }
     }
 }

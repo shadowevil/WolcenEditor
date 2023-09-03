@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WolcenEditor": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\ShadowEvil\\source\\repos\\WolcenEditor\\Release"
+    }
+  }
+}
